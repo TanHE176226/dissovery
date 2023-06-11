@@ -1,0 +1,11 @@
+.banner-section {
+	display: flex;
+	align-items: center;
+	padding: 45px 0 40px;
+}
+
+.banner__text h2 {
+	font-size: 46px;
+	color: #ffffff;
+	font-weight: 700;
+}

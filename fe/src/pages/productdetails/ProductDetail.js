@@ -4,7 +4,7 @@ import Footer from '../../components/footer/Footer';
 import './ProductDetail.css'
 
 export default function ProductDetail() {
-    return (
+    return ( 
         <div>
             <Header></Header>
             <div className='container'>
