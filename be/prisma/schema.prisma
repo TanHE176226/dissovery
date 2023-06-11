@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  Email       String      @id @db.VarChar(255)
+  Role        String      @db.VarChar(255)
+  Sex         String      @db.VarChar(255)
+  isDeleted   Boolean
+  DateOfBirth DateTime    @db.Date
+  PhoneNumber String      @db.VarChar(255)
+  Password    String      @db.VarChar(255)
+  LastName    String      @db.VarChar(255)
+  FirstName   String      @db.VarChar(255)
+  Address     String      @db.VarChar(255)
+  Picture     String      @db.VarChar(255)
+  DistID      Int
+  distributor distributor @relation(fields: [DistID], references: [DistID], onDelete: NoAction, onUpdate: NoAction, map: "account_ibfk_1")
+  checkout    checkout[]
+  delivery    delivery[]
+  saletask    saletask[]  @ignore
+
+  @@index([DistID], map: "account_ibfk_1")
+}
+
+model cartdetail {
+  CartID   Int
+  FoodID   Int
+  checkout checkout @relation(fields: [CartID], references: [CartID], onDelete: NoAction, onUpdate: NoAction, map: "cartdetail_ibfk_1")
+  food     food     @relation(fields: [FoodID], references: [FoodID], onDelete: NoAction, onUpdate: NoAction, map: "cartdetail_ibfk_2")
+
+  @@id([CartID, FoodID])
+  @@index([FoodID], map: "FoodID")
+}
+
+model checkout {
+  CartID       Int          @id
+  isStored     Boolean?
+  CreatedDate  DateTime?    @db.DateTime(0)
+  EndDate      DateTime?    @db.DateTime(0)
+  TotalPayment Decimal?     @db.Decimal(10, 2)
+  Email        String?      @db.VarChar(255)
+  cartdetail   cartdetail[]
+  account      account?     @relation(fields: [Email], references: [Email], onDelete: NoAction, onUpdate: NoAction, map: "checkout_ibfk_1")
+
+  @@index([Email], map: "Email")
+}
+
+model delivery {
+  DelID         Int       @id
+  CreatedDate   DateTime? @db.DateTime(0)
+  DeliverDate   DateTime? @db.DateTime(0)
+  DeliverMethod String?   @db.VarChar(255)
+  DeliverPhone  String?   @db.VarChar(255)
+  isStored      Boolean?
+  TotalPayment  Decimal?  @db.Decimal(10, 2)
+  Email         String?   @db.VarChar(255)
+  account       account?  @relation(fields: [Email], references: [Email], onDelete: NoAction, onUpdate: NoAction, map: "delivery_ibfk_1")
+  food          food[]
+
+  @@index([Email], map: "Email")
+}
+
+model distributor {
+  DistID      Int       @id
+  Picture     String?   @db.VarChar(255)
+  PhoneNumber String?   @db.VarChar(255)
+  Description String?   @db.VarChar(255)
+  isDeleted   Boolean?
+  Domain      String?   @db.VarChar(255)
+  Name        String?   @db.VarChar(255)
+  Address     String?   @db.VarChar(255)
+  account     account[]
+}
+
+model food {
+  FoodID      Int          @id
+  Name        String?      @db.VarChar(255)
+  Description String?      @db.VarChar(255)
+  Category    String?      @db.VarChar(255)
+  Picture     String?      @db.VarChar(255)
+  CreatedDate DateTime?    @db.DateTime(0)
+  ExpDate     DateTime?    @db.DateTime(0)
+  AvaiAmount  Int?
+  Content     String?      @db.VarChar(255)
+  NormalPrice Decimal?     @db.Decimal(10, 2)
+  SalePrice   Decimal?     @db.Decimal(10, 2)
+  DelID       Int?
+  cartdetail  cartdetail[]
+  delivery    delivery?    @relation(fields: [DelID], references: [DelID], onDelete: NoAction, onUpdate: NoAction, map: "food_ibfk_1")
+  nutrient    nutrient[]
+  saletask    saletask[]   @ignore
+
+  @@index([DelID], map: "DelID")
+}
+
+model nutrient {
+  NutriID     Int     @id
+  Name        String? @db.VarChar(255)
+  Description String? @db.VarChar(255)
+  Amount      Float?  @db.Float
+  FoodID      Int?
+  food        food?   @relation(fields: [FoodID], references: [FoodID], onDelete: NoAction, onUpdate: NoAction, map: "nutrient_ibfk_1")
+
+  @@index([FoodID], map: "FoodID")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model saletask {
+  Email          String   @db.VarChar(255)
+  FoodID         Int
+  CreatedDate    DateTime @db.DateTime(0)
+  SubmitedStatus String   @db.VarChar(255)
+  SubmitedDate   DateTime @db.DateTime(0)
+  account        account  @relation(fields: [Email], references: [Email], onDelete: NoAction, onUpdate: NoAction, map: "saletask_ibfk_1")
+  food           food     @relation(fields: [FoodID], references: [FoodID], onDelete: NoAction, onUpdate: NoAction, map: "saletask_ibfk_2")
+
+  @@index([Email], map: "saletask_ibfk_1")
+  @@index([FoodID], map: "saletask_ibfk_2")
+  @@ignore
+}
