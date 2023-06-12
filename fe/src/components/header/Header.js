@@ -1,9 +1,16 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
+import axios from 'axios'
 
+export default function Header(props) {
 
-export default function Header() {
+    let searchValue = ''
+    const handleClick = () => {
+        axios.get(`http://localhost:3001/SearchById/${searchValue}`)
+        .then(res => {props.cuong(res.data);})
+        .catch(err => console.log(err))
+    }
     return (
         <div>
             {/* -----------------------------HEADER TOP------------------------ */}
@@ -156,8 +163,8 @@ export default function Header() {
                                             All Categories
                                             <span className="arrow_carrot-down" />
                                         </div>
-                                        <input type="text" placeholder="What do yo u need?" />
-                                        <button type="submit" className="site-btn">SEARCH</button>
+                                        <input onChange={(event) => searchValue = event.target.value} type="text" placeholder="What do yo u need?" />
+                                        <button onClick = {handleClick} type='submit'  className="site-btn">SEARCH</button>
                                     </form>
                                 </div>
                                 <div className="hero__search__phone">

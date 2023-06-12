@@ -2,7 +2,7 @@ import React from 'react'
 import './Card.css';
 
 const srcc = "/assets/banner.jpg"
-export default function Card() {
+export default function Card(props) {
     return (
         <div>
             <div className="card__item">

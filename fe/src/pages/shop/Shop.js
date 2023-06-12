@@ -12,19 +12,14 @@ import './Shop.css';
 
 export default function Shop() {
     const [items, setItems] = useState([]);
-    useEffect(() => {
-        axios.post("http://localhost:3001/shop")
-        .then(response => setItems(response.data))
-        .catch(error => console.log(error))
-      }
-        
-      ,[])
-    
+   
      const render = () => {
       const cards = []
       items.map(item => 
         cards.push(          
-         <Col lg = {4} xs = {4}> <MyCard cardData = {item}/></Col>
+         <Col lg = {4} xs = {4}> 
+         <MyCard cardData = {item}/>
+         </Col>
         )
       )
       return (
@@ -32,9 +27,10 @@ export default function Shop() {
         {cards}
         </Row>)
     }
+    // mỗi khi thằng set item được trigger (ở bất kì component nào) thì cái shop nó phải f5 lại để render ra dữ liệu items
     return (
         <div>
-            <Header />
+            <Header cuong = {setItems} />
             {/*---------------- Banner------------------- */}
             <section className="banner-section" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/breadcrumb.jpg)` }}>
                 <div className="container">
