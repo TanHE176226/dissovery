@@ -12,7 +12,7 @@ export default function ProductDetail() {
                     <div className="col-lg-6 col-md-6">
                         <div className="product__details__pic">
                             <div className="product__details__pic__item">
-                                <img className="product__details__pic__item--large" src={process.env.PUBLIC_URL + "/product-details-1.jpg"} alt />
+                                <img className="product__details__pic__item--large" src={process.env.PUBLIC_URL + "/assets/product-details-1.jpg"} alt />
                             </div>
                         </div>
                     </div>
