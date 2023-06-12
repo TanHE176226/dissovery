@@ -30,7 +30,7 @@ export default function Shop() {
     // mỗi khi thằng set item được trigger (ở bất kì component nào) thì cái shop nó phải f5 lại để render ra dữ liệu items
     return (
         <div>
-            <Header cuong = {setItems} />
+            <Header foodSearch = {setItems} />
             {/*---------------- Banner------------------- */}
             <section className="banner-section" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/breadcrumb.jpg)` }}>
                 <div className="container">
