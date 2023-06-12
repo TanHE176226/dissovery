@@ -12,6 +12,13 @@ import './Shop.css';
 
 export default function Shop() {
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        axios.post("http://localhost:3001/shop")
+        .then(response => setItems(response.data))
+        .catch(error => console.error(error));
+    }
+    ,[])
    
      const render = () => {
       const cards = []
@@ -27,6 +34,7 @@ export default function Shop() {
         {cards}
         </Row>)
     }
+    
     // mỗi khi thằng set item được trigger (ở bất kì component nào) thì cái shop nó phải f5 lại để render ra dữ liệu items
     return (
         <div>
