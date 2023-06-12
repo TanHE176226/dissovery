@@ -8,7 +8,7 @@ export default function Header(props) {
     let searchValue = ''
     const handleClick = () => {
         axios.get(`http://localhost:3001/SearchById/${searchValue}`)
-        .then(res => {props.cuong(res.data);})
+        .then(res => {props.foodSearch(res.data);})
         .catch(err => console.log(err))
     }
     return (
