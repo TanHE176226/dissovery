@@ -7,7 +7,9 @@ import { NavLink } from 'react-router-dom';
 export default function Header(props) {
 
     let searchValue = ''
-    const handleClick = () => {
+    const handleClick = (event) => {
+        event.preventDefault();
+        
         axios.get(`http://localhost:3001/SearchById/${searchValue}`)
             .then(res => { props.foodSearch(res.data); })
             .catch(err => console.log(err))
@@ -168,7 +170,7 @@ export default function Header(props) {
                                             <span className="arrow_carrot-down" />
                                         </div>
                                         <input onChange={(event) => searchValue = event.target.value} type="text" placeholder="What do yo u need?" />
-                                        <button onClick={handleClick} type='submit' className="site-btn">SEARCH</button>
+                                        <button onClick={handleClick} className="site-btn">SEARCH</button>
                                     </form>
                                 </div>
                                 <div className="hero__search__phone">
