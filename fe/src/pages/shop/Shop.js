@@ -14,11 +14,10 @@ export default function Shop() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.post("http://localhost:3001/shop")
+        axios.get("http://localhost:3001/getfood/all")
             .then(response => setItems(response.data))
             .catch(error => console.error(error));
     }, [])
-
     const render = () => {
         const cards = []
         items.map(item =>

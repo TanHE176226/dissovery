@@ -16,6 +16,7 @@ app.get('/', function (req, res) {
 //sử dụng routes để đưa đường dẫn đúng controller xử lý
 app.use('/getfood', foodRoutes);
 
+
 app.listen(3001, function () {
   console.log('Example app listening on port 3001npm!');
 });
