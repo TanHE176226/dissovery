@@ -43,7 +43,7 @@ export default function Shop() {
             )
         )
         return (
-            <div className='container'>
+            <div className='container '>
                 <div className='row d-flex'>
                     {cards}
                 </div>

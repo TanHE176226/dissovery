@@ -48,7 +48,7 @@ export default function Header(props) {
                 <div className="row">
                     <div className="col-lg-3">
                         <div className="header__logo">
-                            <img src={process.env.PUBLIC_URL + "/Healthy2.png"} alt="" />
+                            <img src={process.env.PUBLIC_URL + "/assets/Healthy2.png"} alt="" />
                         </div>
                     </div>
                     <div className="col-lg-6">
