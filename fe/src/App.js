@@ -9,6 +9,9 @@ import Signup from './pages/auth/Signup';
 import Cart from './pages/cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
+import Login from './Login';
+import Signup from './Signup';
+
 
 
 function App() {

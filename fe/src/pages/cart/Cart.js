@@ -22,6 +22,7 @@ export default function Cart() {
     console.log(cartItems);
 
     const handleRemoveItem = (foodID) => {
+        console.log("This is foodID in handleRemoveItem: " + foodID);
         axios
             .post(`http://localhost:3001/cart/remove/${cartID}`, { foodID })
             .then((response) => {
@@ -69,6 +70,11 @@ export default function Cart() {
                                             </td>
                                             <td className="shoping__cart__price">
                                                 {cartItem.SalePrice}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" onClick={() => handleRemoveItem(cartItem.FoodID)}>
+                                                    Remove
+                                                </button>
                                             </td>
                                             {/* <td className="shoping__cart__quantity">
                                                 <div className="quantity">

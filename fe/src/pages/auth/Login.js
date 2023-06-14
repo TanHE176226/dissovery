@@ -1,32 +1,65 @@
-import React from 'react';
+
+
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
   const navigate = useNavigate();
-  let Email = '';
-  let Password = '';
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return emailRegex.test(email);
+  }
+
+  function validatePassword(password) {
+    return password.trim() !== '';
+  }
 
   function handleEmailChange(event) {
-    Email = event.target.value;
+    const inputValue = event.target.value;
+    setEmail(inputValue);
+    setEmailError('');
   }
 
   function handlePasswordChange(event) {
-    Password = event.target.value;
+    const inputValue = event.target.value;
+
+    setPassword(inputValue);
+    setPasswordError('');
   }
 
   function sendRequest() {
-    axios
-      .post("http://localhost:3000/login", { Email, Password })
-      .then(response => {
-        if (response && response.data) {
-          console.log(response.data);
-          navigate('/home');
-        } else {
-          alert("Login failed");
-        }
-      })
-      .catch(error => console.log(error));
+    let isValid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError('check your email or password');
+      isValid = false;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError('password is not empty');
+      isValid = false;
+    }
+
+    if (isValid) {
+      axios
+        .post('http://localhost:3000/login', { email, password })
+        .then((response) => {
+          if (response && response.data) {
+            console.log(response.data);
+            navigate('/home');
+          } else {
+            alert('Login failed');
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   return (
@@ -41,9 +74,11 @@ function Login() {
             type='email'
             placeholder='Enter Email'
             name='email'
+            value={email}
             onChange={handleEmailChange}
             className='form-control rounded-0'
           />
+          {emailError && <p className='text-danger'>{emailError}</p>}
         </div>
         <div className='mb-3'>
           <label htmlFor='password'>
@@ -53,11 +88,17 @@ function Login() {
             type='password'
             placeholder='Enter Password'
             name='password'
+            value={password}
             onChange={handlePasswordChange}
             className='form-control rounded-0'
           />
+          {passwordError && <p className='text-danger'>{passwordError}</p>}
         </div>
-        <button onClick={sendRequest} type='submit' className='btn btn-success w-100'>
+        <button
+          onClick={sendRequest}
+          type='submit'
+          className='btn btn-success w-100'
+        >
           <strong>Log in</strong>
         </button>
         <Link
