@@ -13,6 +13,16 @@ app.get('/', function (req, res) {
   res.send('Hello world');
 });
 
+app.get('/SearchById/:id', async(req,res) => {
+  const {id} = req.params; 
+  const foods = await prisma.food.findMany()
+  const filtedFoods = []
+  foods.forEach(food => { if (food.Name.includes(id)){
+    filtedFoods.push(food) 
+  }})
+  console.log(filtedFoods)
+    res.send(filtedFoods)
+  })
 //sử dụng routes để đưa đường dẫn đúng controller xử lý
 app.use('/getfood', foodRoutes);
 

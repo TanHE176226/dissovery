@@ -16,7 +16,7 @@ export const CardProduct = (food) => {
                 </div>
                 <div className="card__item__text">
                     <h6><a href="/">{food.cardData.Name}</a></h6>
-                    <h5>${food.cardData.Name}</h5>
+                    <h5>{food.cardData.Name}</h5>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { MyCard } from './MyCard';
+
 import { Card, Col, Row } from 'react-bootstrap';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -19,21 +19,7 @@ export default function Shop() {
             .then(response => setItems(response.data))
             .catch(error => console.error(error));
     }, [])
-    // const render = () => {
-    //     const cards = []
-    //     items.map(item =>
-    //         cards.push(
-    //             <Col lg={4} xs={4}>
-    //                 <MyCard cardData={item} />
-    //             </Col>
-    //         )
-    //     )
-    //     return (
-    //         <Row>
-    //             {cards}
-    //         </Row>)
-    // }
-    const render1 = () => {
+    const render = () => {
         const cards = []
         items.map(item =>
             cards.push(
@@ -62,12 +48,12 @@ export default function Shop() {
                         <div className="col-lg-12 text-center">
                             <div className="banner__text">
                                 <h2>Dissover Cheaper Food</h2>
-                            </div>
+                            </div>                            
                         </div>
-                    </div>
-                </div>
+                    </div>                   
+                </div>             
             </section>
-            {render1()}
+            {render()}
             <Footer />
         </div>
     )
