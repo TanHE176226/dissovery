@@ -1,12 +1,20 @@
 class Validator {
-    static validateNumber(value) {
-      const numberRegex = /^[0-9]+$/; // Biểu thức chính quy cho số
-      return numberRegex.test(value);
+    static validateQuantity(
+        value,
+        minQuantity,
+        maxQuantity,
+        messageInvalidNumber,
+        messageOutOfRange,
+    ) {
+        const numberRegex = /^[0-9]+$/; // Biểu thức chính quy cho số
+        if ( !numberRegex.test(value) || value == '' ) {
+            return { isValid: false, errorMessage: messageInvalidNumber };
+        }
+        const quantity = parseInt(value);
+        if (quantity > maxQuantity || quantity < minQuantity) {
+            return { isValid: false, errorMessage: messageOutOfRange };
+        }
+        return { isValid: true};
     }
-    static validateString(value){
-        return;
-    }
-  }
-  
+}
 export default Validator;
-  
