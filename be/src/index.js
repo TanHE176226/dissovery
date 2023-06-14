@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+app.use(express.json());
+app.use(express.static('public'));
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -72,6 +74,7 @@ app.get('/', function (req, res) {
 
 //sử dụng routes để đưa đường dẫn đúng controller xử lý
 app.use('/getfood', foodRoutes);
+app.use("/cart", require("./routes/cartRoute"));
 
 app.listen(3001, function () {
   console.log('Example app listening on port 3001npm!');
