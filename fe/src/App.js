@@ -12,10 +12,12 @@ import Shop from './pages/shop/Shop';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/productdetails" element={<ProductDetail />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="/cart/:cartID" element={<Cart />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/productdetails" element={<ProductDetail />} />
+      <Route exact path="/productdetails/:id" element={<ProductDetail />} />
+      <Route exact path="/shop" element={<Shop />} />
+      <Route exact path="/cart" element={<Cart />} />
+      <Route exact path="/cart/:cartID" element={<Cart />} />
     </Routes>
   );
 }
