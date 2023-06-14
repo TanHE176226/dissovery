@@ -65,10 +65,12 @@ app.post('/login', async (req, res) => {
 });
 const PORT = 3000;
 
-// app.get('/', function (req, res) {
-//   res.send('Hello world');
-// });
+//định nghĩa các route cho ứng dụng của mình bằng cách sử dụng các phương thức HTTP như GET, POST, PUT, DELETE, vv:
+app.get('/', function (req, res) {
+  res.send('Hello world');
+});
 
+//sử dụng routes để đưa đường dẫn đúng controller xử lý
 app.use('/getfood', foodRoutes);
 
 app.listen(3001, function () {

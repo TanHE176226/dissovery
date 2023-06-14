@@ -1,9 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
+import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
+export default function Header(props) {
 
-export default function Header() {
+    let searchValue = ''
+    const handleClick = () => {
+        axios.get(`http://localhost:3001/SearchById/${searchValue}`)
+            .then(res => { props.foodSearch(res.data); })
+            .catch(err => console.log(err))
+    }
     return (
         <div>
             {/* -----------------------------HEADER TOP------------------------ */}
@@ -26,7 +34,9 @@ export default function Header() {
                                     <a href="#"><i className="fab fa-pinterest-p"></i></a>
                                 </div>
                                 <div className="header__top__right__auth">
-                                    <a href="#"><i className="fa fa-user"></i> LOGIN</a>
+                                    <NavLink to="/login">
+                                        <i className="fa fa-user"></i> LOGIN
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -44,18 +54,19 @@ export default function Header() {
                     <div className="col-lg-6">
                         <nav className="header__menu">
                             <ul>
-                                <li className="active"><a href="/">Home</a></li>
-                                <li><a href="./shop">Shop</a></li>
-                                <li><a href="/">Pages</a>
+                                <li className="active"><NavLink exact to="/">Home</NavLink></li>
+                                <li><NavLink to="/shop">Shop</NavLink></li>
+                                <li>
+                                    <NavLink to="/">Pages</NavLink>
                                     <ul className="header__menu__dropdown">
-                                        <li><a href="./productdetails">Shop Details</a></li>
-                                        <li><a href="./cart">Shoping Cart</a></li>
-                                        <li><a href="./checkout">Check Out</a></li>
-                                        <li><a href="./blogdetails">Blog Details</a></li>
+                                        <li><NavLink to="/productdetails">Shop Details</NavLink></li>
+                                        <li><NavLink to="/cart">Shopping Cart</NavLink></li>
+                                        <li><NavLink to="/checkout">Check Out</NavLink></li>
+                                        <li><NavLink to="/blogdetails">Blog Details</NavLink></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog">Blog</a></li>
-                                <li><a href="./contact">Contact</a></li>
+                                <li><NavLink to="/blog">Blog</NavLink></li>
+                                <li><NavLink to="/contact">Contact</NavLink></li>
                             </ul>
                         </nav>
                     </div>
@@ -156,8 +167,8 @@ export default function Header() {
                                             All Categories
                                             <span className="arrow_carrot-down" />
                                         </div>
-                                        <input type="text" placeholder="What do yo u need?" />
-                                        <button type="submit" className="site-btn">SEARCH</button>
+                                        <input onChange={(event) => searchValue = event.target.value} type="text" placeholder="What do yo u need?" />
+                                        <button onClick={handleClick} type='submit' className="site-btn">SEARCH</button>
                                     </form>
                                 </div>
                                 <div className="hero__search__phone">

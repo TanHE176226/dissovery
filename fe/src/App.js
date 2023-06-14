@@ -4,6 +4,8 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
 import ProductDetail from './pages/productdetails/ProductDetail';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Signup';
 import Cart from './pages/cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
@@ -15,11 +17,14 @@ import Signup from './Signup';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-
-      <Route path="/productdetails" element={<ProductDetail />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/shop" element={<Shop />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/productdetails" element={<ProductDetail />} />
+      <Route exact path="/productdetails/:id" element={<ProductDetail />} />
+      <Route exact path="/shop" element={<Shop />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/signup" element={<Signup />} />
+      <Route exact path="/cart" element={<Cart />} />
+      <Route exact path="/cart/:cartID" element={<Cart />} />
     </Routes>
   );
 }

@@ -1,9 +1,44 @@
 import React from 'react'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import './Cart.css'
 
 export default function Cart() {
+    const { cartID } = useParams();
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:3001/cart/${cartID}`)
+            .then(response => {
+                setCartItems(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, [cartID]);
+    console.log(cartItems);
+
+    const handleRemoveItem = (foodID) => {
+        axios
+            .post(`http://localhost:3001/cart/remove/${cartID}`, { foodID })
+            .then((response) => {
+                // Update the state variable with the latest cart items data
+                setCartItems(response.data.foodList);
+                // Force a page reload
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                // Redirect to the same URL
+                window.location.href = window.location.href;
+            });
+    };
+
     return (
         <div>
             <Header />
@@ -16,56 +51,40 @@ export default function Cart() {
                                     <tr>
                                         <th className="shoping__product">Products</th>
                                         <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
+                                        {/* <th>Quantity</th>
+                                        <th>Total</th> */}
                                         <th />
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td className="shoping__cart__item">
-                                            <img src="img/cart/cart-1.jpg" alt />
-                                            <h5>Vegetable’s Package</h5>
-                                        </td>
-                                        <td className="shoping__cart__price">
-                                            $55.00
-                                        </td>
-                                        <td className="shoping__cart__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" defaultValue={1} />
+                                    {cartItems && cartItems.foodList && cartItems.foodList.map(cartItem => (
+                                        <tr>
+                                            <td className="shoping__cart__item">
+                                                <div class="d-flex">
+                                                    <img src={cartItem.Picture} alt="" />
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="shoping__cart__total">
-                                            $110.00
-                                        </td>
-                                        <td className="shoping__cart__item__close">
-                                            <span className="icon_close" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="shoping__cart__item">
-                                            <img src="img/cart/cart-2.jpg" alt />
-                                            <h5>Fresh Garden Vegetable</h5>
-                                        </td>
-                                        <td className="shoping__cart__price">
-                                            $39.00
-                                        </td>
-                                        <td className="shoping__cart__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" defaultValue={1} />
+                                                <div class="media-body">
+                                                    <h5>{cartItem.Name}</h5>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="shoping__cart__total">
-                                            $39.99
-                                        </td>
-                                        <td className="shoping__cart__item__close">
-                                            <span className="icon_close" />
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td className="shoping__cart__price">
+                                                {cartItem.SalePrice}
+                                            </td>
+                                            {/* <td className="shoping__cart__quantity">
+                                                <div className="quantity">
+                                                    <div className="pro-qty">
+                                                        <input type="text" defaultValue={1} />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="shoping__cart__total">
+                                                $110.00
+                                            </td>
+                                            <td className="shoping__cart__item__close">
+                                                <span className="icon_close" />
+                                            </td> */}
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
