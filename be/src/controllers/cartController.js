@@ -54,3 +54,37 @@ exports.removeCart = async (req, res, next) => {
         next(error);
     }
 };
+
+// exports.addToCart = async (req, res, next) => {
+//   try {
+//     const { foodId, userId, quantity } = req.body;
+
+//     if (!foodId || !userId || !quantity) {
+//       return res.status(400).json({ success: false, message: 'Missing foodId, userId, or quantity' });
+//     }
+
+//     const cart = await prisma.cart.findFirst({ where: { userId } });
+
+//     if (!cart) {
+//       const newCart = await prisma.cart.create({ data: { userId } });
+//       await prisma.cartItem.create({ data: { cartId: newCart.id, foodId, quantity } });
+//     } else {
+//       const cartItem = await prisma.cartItem.findFirst({ where: { cartId: cart.id, foodId } });
+
+//       if (cartItem) {
+//         await prisma.cartItem.update({
+//           where: { id: cartItem.id },
+//           data: { quantity: cartItem.quantity + quantity },
+//         });
+//       } else {
+//         await prisma.cartItem.create({ data: { cartId: cart.id, foodId, quantity } });
+//       }
+//     }
+
+//     return res.status(200).json({ success: true, message: 'Product added to cart successfully' });
+//   } catch (error) {
+//     console.error('Failed to add product to cart', error);
+//     return res.status(500).json({ success: false, message: 'Internal server error' });
+//   }
+// };
+
