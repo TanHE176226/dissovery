@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useContext } from 'react';
+import { Context } from '../../App';
 
 function Login() {
+
+  const context = useContext(Context);
   const navigate = useNavigate();
   let Email = '';
   let Password = '';
@@ -22,6 +26,7 @@ function Login() {
         if (response && response.data) {
           console.log(response.data);
           navigate('/home');
+          context.handleLogin();
         } else {
 
           alert("Login failed");

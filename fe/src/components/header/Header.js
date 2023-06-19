@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../App';
+
 export default function Header(props) {
 
     let searchValue = '';
@@ -15,18 +18,7 @@ export default function Header(props) {
             .catch(err => console.log(err))
     }
     
-    const [isLoggedIn, setLoggedIn] = useState(false);
-
-    // Hàm xử lý đăng nhập thành công
-    const handleLogin = () => {
-        setLoggedIn(true);
-    };
-
-    // Hàm xử lý đăng xuất
-    const handleLogout = () => {
-        setLoggedIn(false);
-    };
-
+   const {handleLogout, handleLogin, isLoggedIn} = useContext(Context);
 
     return (
         <div>
@@ -49,7 +41,7 @@ export default function Header(props) {
                                     <a href="#"><i className="fab fa-linkedin"></i></a>
                                     <a href="#"><i className="fab fa-pinterest-p"></i></a>
                                     {isLoggedIn ? (
-                                        <NavLink to="/logout" onClick={handleLogout}>
+                                        <NavLink to="/" onClick={handleLogout}>
                                             <i className="fa fa-user"></i> LOGOUT
                                         </NavLink>
                                     ) : (
