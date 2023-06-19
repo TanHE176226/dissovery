@@ -11,12 +11,11 @@ import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
 import { HomeUser } from './pages/homeuser/HomeUser';
 
-
-
 function App() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
+      <Route exact path="/home" element={<Home />} />
       <Route exact path="/productdetails" element={<ProductDetail />} />
       <Route exact path="/productdetails/:id" element={<ProductDetail />} />
       <Route exact path="/shop" element={<Shop />} />
