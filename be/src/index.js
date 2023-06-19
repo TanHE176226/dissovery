@@ -33,6 +33,7 @@ app.use('/cart',require("./routes/cartRoute"));
 //Sign Up 
 app.post('/signup', async (req, res) => {
   const { FirstName, LastName, Email, Password } = req.body;
+  
   try {
     const createdAccount = await prisma.account.create({
       data: {

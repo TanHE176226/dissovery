@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Header(props) {
 
-    let searchValue = ''
+    let searchValue = '';
     const handleClick = (event) => {
         event.preventDefault();
         
