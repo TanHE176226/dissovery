@@ -9,7 +9,7 @@ export default function Footer() {
                     <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="footer__about">
                             <div className="footer__about__logo">
-                                <img src={process.env.PUBLIC_URL + "/Healthy2.png"} alt="" />
+                                <img src={process.env.PUBLIC_URL + "/assets/Healthy2.png"} alt="" />
                             </div>
                             <ul>
                                 <li>Address: FPT University</li>
