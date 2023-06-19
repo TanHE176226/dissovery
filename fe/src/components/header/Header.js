@@ -10,7 +10,7 @@ export default function Header(props) {
     const handleClick = (event) => {
         event.preventDefault();
 
-        axios.get(`http://localhost:3001/SearchById/${searchValue}`)
+        axios.get(`http://localhost:3001/getfood/SearchById/${searchValue}`)
             .then(res => { props.foodSearch(res.data); })
             .catch(err => console.log(err))
     }
