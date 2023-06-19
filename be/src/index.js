@@ -6,6 +6,11 @@ const foodRoutes = require('./routes/footRoutes');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors({ origin: 'http://localhost:3000' }));
