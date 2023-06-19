@@ -45,7 +45,7 @@ function Sginup() {
 
                     console.log(response.data);
 
-                    navigate('/');
+                    navigate('/login');
 
                 } else {
 
@@ -119,7 +119,7 @@ function Sginup() {
 
                 </button>
                 <Link
-                    to='/'
+                    to='/login'
 
                     className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'
                 >

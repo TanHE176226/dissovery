@@ -6,7 +6,6 @@ const foodRoutes = require('./routes/footRoutes');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors({ origin: 'http://localhost:3000' }));
@@ -34,7 +33,6 @@ app.use('/cart',require("./routes/cartRoute"));
 //Sign Up 
 app.post('/signup', async (req, res) => {
   const { FirstName, LastName, Email, Password } = req.body;
-
   try {
     const createdAccount = await prisma.account.create({
       data: {
@@ -54,9 +52,11 @@ app.post('/signup', async (req, res) => {
 
 //Login
 app.post('/login', async (req, res) => {
+
+  const { Email, Password } = req.body;
   console.log("This is email: " + Email);
   console.log("This is password: " + Password);
-  const { Email, Password } = req.body;
+  
   const account = await prisma.account.findFirst({
     where: {
       Email,
