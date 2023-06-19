@@ -9,6 +9,7 @@ import Signup from './pages/auth/Signup';
 import Cart from './pages/cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
+import { HomeUser } from './pages/homeuser/HomeUser';
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route exact path="/signup" element={<Signup />} />
       <Route exact path="/cart" element={<Cart />} />
       <Route exact path="/cart/:cartID" element={<Cart />} />
+      <Route exact path="/homeuser" element={<HomeUser />} />
     </Routes>
   );
 }
