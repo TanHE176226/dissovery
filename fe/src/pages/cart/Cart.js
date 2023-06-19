@@ -76,19 +76,6 @@ export default function Cart() {
                                                     Remove
                                                 </button>
                                             </td>
-                                            {/* <td className="shoping__cart__quantity">
-                                                <div className="quantity">
-                                                    <div className="pro-qty">
-                                                        <input type="text" defaultValue={1} />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="shoping__cart__total">
-                                                $110.00
-                                            </td>
-                                            <td className="shoping__cart__item__close">
-                                                <span className="icon_close" />
-                                            </td> */}
                                         </tr>
                                     ))}
                                 </tbody>
