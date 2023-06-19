@@ -50,7 +50,7 @@
 .header__top__right__social {
     position: relative;
     display: inline-block;
-    margin-right: 35px;
+   
 }
 
 
@@ -78,6 +78,7 @@
 
 .header__top__right__auth {
     display: inline-block;
+    margin-left: 30px;
 }
 
 .header__top__right__auth a {
@@ -443,7 +444,9 @@
 .hero__text p {
     margin-bottom: 35px;
 }
-
+.logout:hover{
+    color:#000000;
+}
 
 
 
