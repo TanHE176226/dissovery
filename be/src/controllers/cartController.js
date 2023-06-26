@@ -58,3 +58,44 @@ exports.removeCart = async (req, res, next) => {
 exports.checkOut = async (req, res, next) => {
 
 }
+
+exports.addToCart = async (req, res, next) => {
+    try {
+        const { foodID, quantityAdd } = req.body;
+        // Check if the food exist
+        const existingCartItem = await prisma.cartdetail.findFirst({
+            where: {
+                FoodID: foodID
+            }
+        });
+        if (existingCartItem) {
+            // if exists, increase the quantity in the existing cart
+            const updatedCartItem = await prisma.cartdetail.update({
+                where: {
+                    CartID_FoodID: {
+                        CartID: existingCartItem.CartID,
+                        FoodID: foodID
+                    }
+                },
+                data: {
+                    quantity: existingCartItem.quantity + quantityAdd
+                }
+            });
+            res.status(200).json({ message: "Item added to cart successfully." });
+        } else {
+            // If does not exist in any cart, create a new cartdetail 
+            const newCartItem = await prisma.cartdetail.create({
+                data: {
+                    FoodID: foodID,
+                    quantity: quantityAdd
+                }
+            });
+            res.status(200).json({ message: "Item added to cart successfully." });
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
+
+

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-function Login() {
+function Sginup() {
 
     const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ function Login() {
     function handleFirstNameChange(event) {
         FirstName = event.target.value;
     }
+    
     function handleLastNameChange(event) {
 
         LastName = event.target.value;
@@ -36,7 +37,7 @@ function Login() {
     function sendRequest() {
 
         axios
-            .post("http://localhost:3000/signup", { FirstName, LastName, Email, Password })
+            .post("http://localhost:3001/signup", { FirstName, LastName, Email, Password })
 
             .then(response => {
 
@@ -44,7 +45,7 @@ function Login() {
 
                     console.log(response.data);
 
-                    navigate('/');
+                    navigate('/login');
 
                 } else {
 
@@ -89,7 +90,9 @@ function Login() {
                 </div>
                 <div className='mb-3'>
                     <label htmlFor='email'>
+
                         <strong>Enter Email</strong>
+                        
                     </label>
                     <input
                         type='email'
@@ -113,16 +116,20 @@ function Login() {
                 </div>
                 <button onClick={sendRequest} type='submit' className='btn btn-success w-100'>
                     <strong>Sginup</strong>
+
                 </button>
                 <Link
-                    to='/'
+                    to='/login'
+
                     className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'
                 >
                     Login
                 </Link>
+
             </div>
+
         </div>
     );
 }
 
-export default Login;
+export default Sginup;

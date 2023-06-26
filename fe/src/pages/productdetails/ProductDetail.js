@@ -11,7 +11,6 @@ export default function ProductDetail() {
 
 
     const { id } = useParams(); // Nhận ID sản phẩm từ URL
-
     const [food, setFood] = useState({});
     const [quantityAdd, setQuantityAdd] = useState(1);
     const [error, setError] = useState({ isValid: true, errorMessage: '' });
@@ -55,9 +54,9 @@ export default function ProductDetail() {
                 quantityAdd: quantityAdd
             }
             try {
-                const response = await axios.post('http://localhost:3001/addtocart', data);
+                const response = await axios.post('http://localhost:3001/cart/addtocart', data);
                 console.log(response.data);
-                alert("Successful");
+                alert(data);
             } catch (error) {
                 console.error('Cant add to cart', error);
                 alert("Add fail");
