@@ -55,36 +55,44 @@ exports.removeCart = async (req, res, next) => {
     }
 };
 
-// exports.addToCart = async (req, res, next) => {
-//   try {
-//     const { foodId, userId, quantity } = req.body;
 
-//     if (!foodId || !userId || !quantity) {
-//       return res.status(400).json({ success: false, message: 'Missing foodId, userId, or quantity' });
-//     }
+exports.addToCart = async (req, res, next) => {
+    try {
+        const { foodID, quantityAdd } = req.body;
+        // Check if the food exist
+        const existingCartItem = await prisma.cartdetail.findFirst({
+            where: {
+                FoodID: foodID
+            }
+        });
+        if (existingCartItem) {
+            // if exists, increase the quantity in the existing cart
+            const updatedCartItem = await prisma.cartdetail.update({
+                where: {
+                    CartID_FoodID: {
+                        CartID: existingCartItem.CartID,
+                        FoodID: foodID
+                    }
+                },
+                data: {
+                    quantity: existingCartItem.quantity + quantityAdd
+                }
+            });
+            res.status(200).json({ message: "Item added to cart successfully." });
+        } else {
+            // If does not exist in any cart, create a new cartdetail 
+            const newCartItem = await prisma.cartdetail.create({
+                data: {
+                    FoodID: foodID,
+                    quantity: quantityAdd
+                }
+            });
+            res.status(200).json({ message: "Item added to cart successfully." });
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
 
-//     const cart = await prisma.cart.findFirst({ where: { userId } });
-
-//     if (!cart) {
-//       const newCart = await prisma.cart.create({ data: { userId } });
-//       await prisma.cartItem.create({ data: { cartId: newCart.id, foodId, quantity } });
-//     } else {
-//       const cartItem = await prisma.cartItem.findFirst({ where: { cartId: cart.id, foodId } });
-
-//       if (cartItem) {
-//         await prisma.cartItem.update({
-//           where: { id: cartItem.id },
-//           data: { quantity: cartItem.quantity + quantity },
-//         });
-//       } else {
-//         await prisma.cartItem.create({ data: { cartId: cart.id, foodId, quantity } });
-//       }
-//     }
-
-//     return res.status(200).json({ success: true, message: 'Product added to cart successfully' });
-//   } catch (error) {
-//     console.error('Failed to add product to cart', error);
-//     return res.status(500).json({ success: false, message: 'Internal server error' });
-//   }
-// };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Card, Col, Row } from 'react-bootstrap';
+
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import 'bootstrap/dist/css/bootstrap.css';

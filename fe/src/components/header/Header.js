@@ -1,45 +1,57 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../App';
 
 export default function Header(props) {
 
-    let searchValue = ''
+    let searchValue = '';
     const handleClick = (event) => {
         event.preventDefault();
-        
-        axios.get(`http://localhost:3001/SearchById/${searchValue}`)
+
+        axios.get(`http://localhost:3001/getfood/SearchById/${searchValue}`)
             .then(res => { props.foodSearch(res.data); })
             .catch(err => console.log(err))
     }
+    
+   const {handleLogout, handleLogin, isLoggedIn} = useContext(Context);
+
     return (
         <div>
             {/* -----------------------------HEADER TOP------------------------ */}
             <div className="header__top">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-2">
                             <div className="header__top__left">
                                 <ul>
                                     <li><i className="fa fa-envelope"></i>Hello</li>
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-10">
                             <div className="header__top__right">
                                 <div className="header__top__right__social">
                                     <a href="#"><i className="fab fa-facebook"></i></a>
                                     <a href="#"><i className="fab fa-twitter"></i></a>
                                     <a href="#"><i className="fab fa-linkedin"></i></a>
                                     <a href="#"><i className="fab fa-pinterest-p"></i></a>
+                                    {isLoggedIn ? (
+                                        <NavLink to="/" onClick={handleLogout}>
+                                            <i className="fa fa-user"></i> LOGOUT
+                                        </NavLink>
+                                    ) : (
+                                        <NavLink to="/login" onClick={handleLogin}>
+                                            <i className="fa fa-user"></i> LOGIN
+                                        </NavLink>
+                                    )}
+
                                 </div>
-                                <div className="header__top__right__auth">
-                                    <NavLink to="/login">
-                                        <i className="fa fa-user"></i> LOGIN
-                                    </NavLink>
-                                </div>
+
                             </div>
                         </div>
                     </div>

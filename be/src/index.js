@@ -46,9 +46,8 @@ app.post('/signup', async (req, res) => {
     res.json(createdAccount);
   } catch (error) {
     console.error(error);
-    res.json("Error messis");
+    res.json("Error messis xx");
   }
-  
 })
 
 

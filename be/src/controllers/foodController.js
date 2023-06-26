@@ -37,9 +37,26 @@ async function deleteFood(req, res) {
     }
 }
 
+async function searchByName(req, res) {
+    try {
+        const {id} = req.params; 
+        const foods = await prisma.food.findMany()
+        const filtedFoods = []
+        foods.forEach(food => { if (food.Name.includes(id)){
+        filtedFoods.push(food) 
+    }})
+        console.log(filtedFoods)
+        res.send(filtedFoods)
+    } catch (error) {
+        console.error('Failed to get food:', error);
+        res.status(500).json({ error: 'Failed to get food' });
+    }
+}
+
 
 module.exports = {
     getAllFood,
     getFoodById,
     deleteFood,
+    searchByName,
 };
