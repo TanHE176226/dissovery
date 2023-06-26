@@ -52,8 +52,8 @@ export default function Cart() {
                                     <tr>
                                         <th className="shoping__product">Products</th>
                                         <th>Price</th>
-                                        {/* <th>Quantity</th>
-                                        <th>Total</th> */}
+                                        <th>Quantity</th>
+                                        <th>Total</th>
                                         <th />
                                     </tr>
                                 </thead>

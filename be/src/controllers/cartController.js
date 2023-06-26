@@ -54,3 +54,7 @@ exports.removeCart = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.checkOut = async (req, res, next) => {
+
+}
