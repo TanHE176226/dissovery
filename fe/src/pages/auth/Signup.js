@@ -35,7 +35,7 @@ function Sginup() {
     }
 
     function sendRequest() {
-
+        
         axios
             .post("http://localhost:3001/signup", { FirstName, LastName, Email, Password })
 
@@ -45,7 +45,7 @@ function Sginup() {
 
                     console.log(response.data);
 
-                    navigate('/');
+                    navigate('/login');
 
                 } else {
 

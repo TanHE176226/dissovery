@@ -9,10 +9,6 @@ import Signup from './pages/auth/Signup';
 import Cart from './pages/cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
-<<<<<<< HEAD
-
-=======
->>>>>>> c6bb2c5ff62491ce93a95f5a320110f81e6bb1d6
 
 
 

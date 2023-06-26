@@ -7,6 +7,8 @@ class Validator {
         messageOutOfRange,
     ) {
         const numberRegex = /^[0-9]+$/; // Biểu thức chính quy cho số
+          
+        ; // Biểu thức chính quy cho số
         if ( !numberRegex.test(value) || value == '' ) {
             return { isValid: false, errorMessage: messageInvalidNumber };
         }
