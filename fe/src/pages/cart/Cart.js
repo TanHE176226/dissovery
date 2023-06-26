@@ -52,8 +52,8 @@ export default function Cart() {
                                     <tr>
                                         <th className="shoping__product">Products</th>
                                         <th>Price</th>
-                                        {/* <th>Quantity</th>
-                                        <th>Total</th> */}
+                                        <th>Quantity</th>
+                                        <th>Total</th>
                                         <th />
                                     </tr>
                                 </thead>
@@ -62,7 +62,7 @@ export default function Cart() {
                                         <tr>
                                             <td className="shoping__cart__item">
                                                 <div class="d-flex">
-                                                    <img src={cartItem.Picture} alt="" />
+                                                    <img src={process.env.PUBLIC_URL + `/assets/${cartItem.Picture}`} alt="" />
                                                 </div>
                                                 <div class="media-body">
                                                     <h5>{cartItem.Name}</h5>

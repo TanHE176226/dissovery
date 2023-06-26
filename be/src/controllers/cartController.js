@@ -55,6 +55,9 @@ exports.removeCart = async (req, res, next) => {
     }
 };
 
+exports.checkOut = async (req, res, next) => {
+
+}
 
 exports.addToCart = async (req, res, next) => {
     try {
