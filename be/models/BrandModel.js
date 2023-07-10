@@ -1,5 +1,5 @@
 'user strict';
-var sql = require('../../../CLONE/dissovery/be/config/mysql');
+var sql = require('../config/mysql');
 
 // Brand object constructor
 var Brand = function (brand) {
