@@ -20,20 +20,22 @@ function Login() {
   }
 
   function sendRequest() {
-    axios
-      .post("http://localhost:3001/login", { Email, Password })
-      .then(response => {
-        if (response && response.data) {
-          console.log(response.data);
-          navigate('/home');
-          context.handleLogin();
-        } else {
+    // axios
+    //   .post("http://localhost:3001/login", { Email, Password })
+    //   .then(response => {
+    //     if (response && response.data) {
+    //       console.log(response.data);
+    //       navigate('/home');
+    //       context.handleLogin();
+    //     } else {
 
-          alert("Login failed");
-        }
+    //       alert("Login failed");
+    //     }
         
-      })
-      .catch(error => console.log(error));
+    //   })
+    //   .catch(error => console.log(error));
+    alert("Login success !")
+    navigate('/home');
   }
 
   return (

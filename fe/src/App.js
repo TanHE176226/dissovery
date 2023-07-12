@@ -9,13 +9,13 @@ import Signup from './pages/auth/Signup';
 import Cart from './pages/cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import Shop from './pages/shop/Shop';
-<<<<<<< HEAD
 
 
-=======
+
+
 import { HomeUser } from './pages/homeuser/HomeUser';
 import { useState, createContext } from 'react';
->>>>>>> 98713a0e2da3af88301cfdd36af2206ecb5c40d7
+
 
 export const Context = createContext([]);
 function App() {
